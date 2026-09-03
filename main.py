@@ -920,9 +920,9 @@ def generate_teams_message(processed_data_list):
         if counts["（元）わな回収再設置"] > 0: msg_parts.append(f"回収再設置(元分類)({counts['（元）わな回収再設置']}件)")
 
     if not msg_parts:
-        return f"{TARGET_CITY}のわな依頼がありましたが、詳細は不明です（登録件数{len(processed_data_list)}）。"
+        return f"{TARGET_CITY}のデータ連携依頼がありましたが、詳細は不明です（登録件数{len(processed_data_list)}）。"
 
-    return f"{TARGET_CITY}からわなの「{'」と「'.join(msg_parts)}」依頼が届きました。"
+    return f"{TARGET_CITY}から「{'」と「'.join(msg_parts)}」の依頼が届きました。"
 
 def send_teams_notification(message_text, config):
     if not message_text: return False
@@ -991,7 +991,7 @@ def send_onesignal_notification(title, message_body, badge_count, config):
 def main():
     config = load_config(CONFIG_FILE_PATH)
     setup_logging(config.get('Files', 'LOG_DIR', fallback=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'logs')))
-    logging.info("メール処理およびわな依頼自動登録スクリプトを開始します (Microsoft Graph API版)")
+    logging.info("メール添付Excel解析およびデータ連携スクリプトを開始します (Microsoft Graph API版)")
 
     temp_dir = config.get('Files', 'TEMP_DIR', fallback=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'temp'))
     processed_emails_file = config.get('Files', 'PROCESSED_EMAILS_FILE', fallback=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'processed_uids.txt'))
@@ -1098,13 +1098,13 @@ def main():
                 send_teams_notification(final_teams_message, config)
             elif email_processing_attempted:
                 # メール処理は走ったがDB更新なしの場合
-                no_db_msg = f"{TARGET_CITY} わな依頼処理: メールを確認しましたが、新規登録対象はありませんでした。"
+                no_db_msg = f"{TARGET_CITY} データ連携処理: メールを確認しましたが、新規登録対象はありませんでした。"
                 send_teams_notification(no_db_msg, config)
 
             # OneSignal送信
             if total_newly_inserted_main_requests_count > 0:
                 send_onesignal_notification(
-                    f"{TARGET_CITY} わな依頼 追加",
+                    f"{TARGET_CITY} データ連携 追加",
                     f"{total_newly_inserted_main_requests_count}件の新規依頼がありました。",
                     total_newly_inserted_main_requests_count,
                     config
