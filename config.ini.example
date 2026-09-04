@@ -1,0 +1,41 @@
+[Files]
+LOG_DIR = ./logs
+TEMP_DIR = ./temp
+PROCESSED_EMAILS_FILE = ./processed_uids.txt
+
+[Email]
+TENANT_ID = YOUR_AZURE_TENANT_ID
+CLIENT_ID = YOUR_AZURE_CLIENT_ID
+CLIENT_SECRET = YOUR_AZURE_CLIENT_SECRET
+TARGET_EMAIL_ADDRESS = info@example.com
+TARGET_SENDER = sender@city.example.lg.jp
+
+[Excel]
+PASSWORD = YOUR_EXCEL_PASSWORD
+SHEET_NAME_INSTALL = YOUR_SHEET_NAME_1
+SHEET_NAME_RECOVERY = YOUR_SHEET_NAME_2
+
+[API]
+MAP_URL_BASE = https://www.google.com/maps/search/?api=1&query=
+WP_BASE_URL = https://example.com
+WP_BULK_REQUESTS_ENDPOINT = /wp-json/custom-api/v1/bulk/requests
+WP_APP_USERNAME = YOUR_WP_APP_USERNAME
+WP_APP_PASSWORD = YOUR_WP_APP_PASSWORD
+
+[Teams]
+WEBHOOK_URL = https://example.com/webhook/teams
+DASHBOARD_URL = https://example.com/
+PAYLOAD_STRUCTURE = gas_logic_apps_style
+
+[MySQL]
+HOST = your-db-host.example.com
+USER = YOUR_DB_USER
+PASSWORD = YOUR_DB_PASSWORD
+DATABASE = YOUR_DB_NAME
+PORT = 3306
+CHARSET = utf8mb4
+
+[OneSignal]
+APP_ID = YOUR_ONESIGNAL_APP_ID
+API_KEY = YOUR_ONESIGNAL_API_KEY
+TARGET_URL = https://example.com/
